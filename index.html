@@ -76,7 +76,7 @@ opacity:0.5;
 		<div style="width:140px;margin:0;padding:0">
 			 
     <label style="float: left" >
-      <input id="d" class="with-gap" name="group3" type="radio" checked />
+      <input  id="d" class="with-gap" name="group3" type="radio" checked />
       <span style="padding-left:25px">D;</span>
     </label>
 	<label >
@@ -85,7 +85,7 @@ opacity:0.5;
     </label>
   
   <label >
-      <input class="with-gap" name="group3" type="radio" disabled  />
+      <input   class="with-gap" name="group3" type="radio" disabled  />
       <span style="padding-left:25px">R;</span>
     </label>
 		</div>
@@ -2207,7 +2207,7 @@ var images = ["0000_0085e9e41513078a_2018-08-19--13-26-08_11_864.png",
 "h099_9469f5d110d29f43_2019-06-27--01-49-54_115_966.png",
 ];
 
-var prefix = 1000;
+var prefix = 0;
 var currentIndex = 1000;
 var zoom_factor = 1.0,
 orig_width = document.getElementById('image1').getBoundingClientRect().width,
@@ -2346,12 +2346,20 @@ orig_width = document.getElementById('image1').getBoundingClientRect().width,
     }
     else if (e.keyCode == '37') {
 	
+	if((currentIndex - 1) < document.getElementById('index').min)
+	{
+	return;
+	}
 	currentIndex = currentIndex - 1;
 	document.getElementById('index').value = currentIndex;
 	changeImage(currentIndex);
 
     }
     else if (e.keyCode == '39') {
+	if((currentIndex + 1) > document.getElementById('index').max)
+	{
+		return;
+	}
 	currentIndex = currentIndex + 1;
 	document.getElementById('index').value = currentIndex;
 changeImage(currentIndex);
@@ -2364,14 +2372,19 @@ function imageGroup()
 {
   if(this.id === "d" && this.checked)
   {
+  
   prefix = 0
+  document.getElementById('index').max = 1999
   document.getElementById('index').value = 1000;
+  
   changeImage(1000);
   }
   else
   {
   prefix = 2000
+  document.getElementById('index').max = 99
   document.getElementById('index').value = 0;
+  
   changeImage(0);
   }
 }
