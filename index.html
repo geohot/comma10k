@@ -2372,14 +2372,13 @@ function imageGroup()
 {
   if(this.id === "d" && this.checked)
   {
-  
-  prefix = 0
+    prefix = 0
   document.getElementById('index').max = 1999
   document.getElementById('index').value = 1000;
   
   changeImage(1000);
   }
-  else
+  else if(this.id === "h" && this.checked)
   {
   prefix = 2000
   document.getElementById('index').max = 99
