@@ -73,6 +73,22 @@ opacity:0.5;
 		<div style="width:60px;margin:0;padding:0">
 			<input id="index" style="height:30px;width:100%;padding:0;margin:0" type="number" value="1000" max="1999" min="0">
 		</div>
+		<div style="width:140px;margin:0;padding:0">
+			 
+    <label style="float: left" >
+      <input id="d" class="with-gap" name="group3" type="radio" checked />
+      <span style="padding-left:25px">D;</span>
+    </label>
+	<label >
+      <input id="h" class="with-gap" name="group3" type="radio"  />
+      <span style="padding-left:25px">H;</span>
+    </label>
+  
+  <label >
+      <input class="with-gap" name="group3" type="radio" disabled  />
+      <span style="padding-left:25px">R;</span>
+    </label>
+		</div>
 		<div style="flex-grow:1;margin:0;padding:0">
 			<input style="width:100%;padding:0;margin:0" id="opacityControl" type="range" min="0" max="1" step="0.01" value="0.5" oninput="image1.style.opacity = opacityControl.value" />
 		</div>
@@ -2088,8 +2104,110 @@ var images = ["0000_0085e9e41513078a_2018-08-19--13-26-08_11_864.png",
 "1996_6c7ffc65dfef4e01_2018-09-25--16-49-39_17_1197.png",
 "1997_4ea7f6e00a335885_2018-07-30--21-16-39_19_418.png",
 "1998_052a0713d2d1efa6_2018-08-01--11-59-59_9_481.png",
-"1999_a4d990355c36474a_2018-10-29--20-19-58_6_1085.png"];
+"1999_a4d990355c36474a_2018-10-29--20-19-58_6_1085.png",
+"h000_167b789d175db729_2019-07-25--03-14-01_16_714.png",
+"h001_32b45d24b2a13c9d_2019-05-24--14-35-43_20_1022.png",
+"h002_b3e330df436ae2d7_2019-07-13--15-50-54_4_183.png",
+"h003_5ba650d5f54be20b_2019-07-05--20-40-41_0_262.png",
+"h004_207e794f65d6a517_2019-02-02--20-32-39_4_806.png",
+"h005_0fcd4b3c68d5a5dc_2019-06-24--03-49-55_20_1077.png",
+"h006_8a36fee11951fdc6_2019-04-07--03-55-41_18_830.png",
+"h007_b4f4fe3c14aa1e3b_2019-05-30--20-53-41_2_20.png",
+"h008_b67de2c85620cf60_2019-06-25--10-36-42_0_83.png",
+"h009_7d5e9abb241ffe55_2019-06-29--02-18-40_10_1081.png",
+"h010_2639b9cc8a6bf025_2019-02-01--11-59-32_0_412.png",
+"h011_cc0342d8a2184b9d_2019-07-05--08-10-51_52_1107.png",
+"h012_5f82f62b22138c50_2019-07-07--02-12-41_30_1171.png",
+"h013_cdf2f7de565d40ae_2019-07-19--03-16-19_25_557.png",
+"h014_b8727c7398d117f5_2019-05-29--23-27-12_24_480.png",
+"h015_dd1df3c614f7a251_2019-01-06--18-09-41_14_956.png",
+"h016_4a94a6860d1a2760_2019-07-24--18-07-48_23_939.png",
+"h017_a1cda1c82c606a71_2019-07-26--03-09-42_0_6.png",
+"h018_70843b83b4ddae85_2019-01-10--15-34-22_2_1089.png",
+"h019_ee3aac63c7b600e7_2019-07-05--13-42-47_35_606.png",
+"h020_ce2d66e6f7110bf0_2019-04-18--10-54-53_3_382.png",
+"h021_995b6b98bfe5134d_2019-06-20--07-28-19_20_914.png",
+"h022_001bc6c2ce4ab3c7_2019-05-17--18-56-32_174_924.png",
+"h023_052a0713d2d1efa6_2019-01-29--14-59-42_20_1087.png",
+"h024_08eaefeb586680da_2019-06-03--20-41-30_15_1085.png",
+"h025_7e76f042175dc717_2019-06-23--12-15-46_1_657.png",
+"h026_81e584bb9be35925_2019-04-26--19-13-09_2_1039.png",
+"h027_7e76f042175dc717_2019-06-29--16-05-21_52_853.png",
+"h028_666ab82b82fa3e25_2019-07-20--04-48-29_38_43.png",
+"h029_2a6d6ba03fb9c4dc_2019-06-07--19-55-48_6_586.png",
+"h030_e1215f586d353b92_2019-02-28--22-37-11_0_989.png",
+"h031_966c2376d8918d4e_2019-07-15--15-54-56_6_202.png",
+"h032_d1ae3a1c5c80315f_2019-07-13--13-32-48_7_661.png",
+"h033_5ba650d5f54be20b_2019-01-08--06-06-47_2_799.png",
+"h034_fbd011384db5e669_2019-02-20--06-40-40_0_480.png",
+"h035_666ab82b82fa3e25_2019-07-22--05-04-34_223_179.png",
+"h036_d54e102911e1a250_2019-03-17--12-52-44_1_388.png",
+"h037_4a94a6860d1a2760_2019-05-29--14-04-04_37_935.png",
+"h038_b8727c7398d117f5_2019-01-24--09-19-31_71_1128.png",
+"h039_1bdfffd58910b432_2019-05-11--18-57-59_98_544.png",
+"h040_b5e02af15583a9a7_2019-07-22--23-33-26_36_638.png",
+"h041_807f77aac0daa4b6_2019-05-18--23-34-17_13_929.png",
+"h042_559a1f5393595bff_2019-07-29--10-36-51_4_1058.png",
+"h043_7070298ad67b305e_2019-05-25--19-15-25_0_825.png",
+"h044_d2ea74adaff2660d_2019-06-18--17-21-28_43_141.png",
+"h045_1bdfffd58910b432_2019-06-05--16-58-07_23_32.png",
+"h046_dc6ddd56e076d7eb_2019-06-11--08-49-28_3_540.png",
+"h047_b5e02af15583a9a7_2019-06-03--19-29-44_21_286.png",
+"h048_bd9dd8d484c3bc11_2019-02-09--14-20-33_38_352.png",
+"h049_4df48f0f58611218_2019-06-10--10-57-45_27_640.png",
+"h050_74a54811ec34377c_2019-07-14--19-59-26_2_1148.png",
+"h051_1bdfffd58910b432_2019-07-29--01-39-41_17_388.png",
+"h052_0812e2149c1b5609_2019-05-02--14-19-07_25_996.png",
+"h053_8443d7dd0ec9bd92_2019-06-16--10-54-36_27_812.png",
+"h054_7070298ad67b305e_2019-07-05--22-08-29_9_224.png",
+"h055_81e584bb9be35925_2019-04-26--19-37-24_169_401.png",
+"h056_001bc6c2ce4ab3c7_2019-06-11--10-58-58_8_195.png",
+"h057_da0586de1afc76d9_2019-04-03--09-46-57_7_956.png",
+"h058_67dc825821c5da82_2019-02-05--17-56-31_68_282.png",
+"h059_74a54811ec34377c_2019-05-14--22-58-57_1_303.png",
+"h060_052a0713d2d1efa6_2019-01-16--01-22-24_7_828.png",
+"h061_1bdfffd58910b432_2019-06-02--08-07-32_0_32.png",
+"h062_e2b03b5bbe03cf0d_2019-05-03--21-29-39_7_1194.png",
+"h063_d981db397f7fef91_2019-05-29--22-25-51_41_309.png",
+"h064_666ab82b82fa3e25_2019-07-25--01-42-29_5_483.png",
+"h065_8466fa0418a0d2d2_2019-05-28--23-57-53_16_1153.png",
+"h066_32b45d24b2a13c9d_2019-05-06--19-58-23_1_929.png",
+"h067_bb88d04bcf85bfc0_2019-05-21--00-06-49_2_978.png",
+"h068_d4d3e5d634d5016b_2019-03-04--08-53-23_1_550.png",
+"h069_6ebb7e74ad25b4be_2019-04-28--07-12-14_3_160.png",
+"h070_995b6b98bfe5134d_2019-06-28--20-09-16_4_272.png",
+"h071_4ce14fe32b50d75a_2019-04-27--12-32-14_22_1123.png",
+"h072_06fe077860a24881_2019-04-11--14-37-53_36_1036.png",
+"h073_d032110b97b43713_2019-04-30--16-41-49_5_306.png",
+"h074_ee3aac63c7b600e7_2019-07-02--20-27-39_111_1197.png",
+"h075_44fbf416645b77b1_2019-07-26--03-23-52_17_370.png",
+"h076_9058745e0dc8fa5f_2019-02-06--15-54-30_8_497.png",
+"h077_886fcd8408d570e9_2019-07-13--20-26-25_25_189.png",
+"h078_4df48f0f58611218_2019-04-23--05-51-22_0_1090.png",
+"h079_ce2d66e6f7110bf0_2019-04-22--10-15-39_0_673.png",
+"h080_b7dd3440cc320e7a_2019-07-11--15-25-15_10_277.png",
+"h081_b8727c7398d117f5_2019-05-20--16-11-22_2_873.png",
+"h082_6f9c507c063137a7_2019-07-15--04-11-17_6_396.png",
+"h083_1b39947c797d1ca7_2019-05-23--00-01-12_12_534.png",
+"h084_995b6b98bfe5134d_2019-06-20--16-03-36_4_222.png",
+"h085_a4d990355c36474a_2019-05-31--03-12-06_23_634.png",
+"h086_7eb82105754c8369_2019-06-09--20-56-11_16_1001.png",
+"h087_0812e2149c1b5609_2019-01-08--06-02-56_46_332.png",
+"h088_c0b1a80d2392173a_2019-07-14--23-26-43_4_468.png",
+"h089_b5e02af15583a9a7_2019-07-25--12-43-12_46_1154.png",
+"h090_6cbd9d18229d4de9_2019-03-09--22-26-09_5_1133.png",
+"h091_6beaf5de521cf403_2019-05-12--14-04-22_8_201.png",
+"h092_70843b83b4ddae85_2019-01-10--22-46-39_3_756.png",
+"h093_1a743e070707c27a_2019-03-06--18-12-58_1_977.png",
+"h094_d9cf8bcaec563d9e_2019-07-10--13-14-46_0_23.png",
+"h095_87db83980e55d540_2019-01-03--03-22-12_12_1166.png",
+"h096_ee3aac63c7b600e7_2019-07-02--20-27-39_97_131.png",
+"h097_f083de65622c4b53_2019-07-02--10-07-03_41_545.png",
+"h098_b68907f4d11f99ff_2019-07-22--14-33-36_58_473.png",
+"h099_9469f5d110d29f43_2019-06-27--01-49-54_115_966.png",
+];
 
+var prefix = 1000;
 var currentIndex = 1000;
 var zoom_factor = 1.0,
 orig_width = document.getElementById('image1').getBoundingClientRect().width,
@@ -2241,13 +2359,29 @@ changeImage(currentIndex);
     }
 
 }
-	
+
+function imageGroup()
+{
+  if(this.id === "d" && this.checked)
+  {
+  prefix = 0
+  document.getElementById('index').value = 1000;
+  changeImage(1000);
+  }
+  else
+  {
+  prefix = 2000
+  document.getElementById('index').value = 0;
+  changeImage(0);
+  }
+}
+
 function changeImage(index)
 {
 	currentIndex = index;
 
-	document.getElementById("image2").src = "https://raw.githubusercontent.com/commaai/comma10k/master/imgs/" + images[index];
-	document.getElementById("image1").src = "https://raw.githubusercontent.com/commaai/comma10k/master/masks/" + images[index];
+	document.getElementById("image2").src = "https://raw.githubusercontent.com/commaai/comma10k/master/imgs/" + images[prefix+index];
+	document.getElementById("image1").src = "https://raw.githubusercontent.com/commaai/comma10k/master/masks/" + images[prefix+index];
 	  
         M.toast({html: images[index]})
 }
@@ -2279,6 +2413,9 @@ document.getElementById('zoom-container').addEventListener('mousemove', zoomer.w
 document.getElementById('zoom-container').addEventListener('mouseup', zoomer.stop_drag);
 document.getElementById('zoom-container').addEventListener('mouseout', zoomer.stop_drag);
 document.getElementById('index').addEventListener('change', function(evt) {changeImage(Number(this.value))} );
+document.getElementById('d').addEventListener('change', imageGroup );
+document.getElementById('h').addEventListener('change', imageGroup );
+
 document.onkeydown = checkKey;
 
 })
