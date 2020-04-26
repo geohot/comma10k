@@ -85,7 +85,7 @@ opacity:0.5;
     </label>
   
   <label >
-      <input   class="with-gap" name="group3" type="radio" disabled  />
+      <input   class="with-gap" name="group3" type="radio"  />
       <span style="padding-left:25px">R;</span>
     </label>
 		</div>
@@ -2205,6 +2205,15 @@ var images = ["0000_0085e9e41513078a_2018-08-19--13-26-08_11_864.png",
 "h097_f083de65622c4b53_2019-07-02--10-07-03_41_545.png",
 "h098_b68907f4d11f99ff_2019-07-22--14-33-36_58_473.png",
 "h099_9469f5d110d29f43_2019-06-27--01-49-54_115_966.png",
+"r000_0e936661c2ec3047_2020-04-03--05-42-17_5_291.png",
+"r001_e518842dc87fdd20_2020-04-10--11-54-26_0_50.png",
+"r002_430b015f92a193be_2019-04-23--11-47-52_187_630.png",
+"r003_3f85a63eb5727bf6_2019-03-15--18-14-59_42_700.png",
+"r004_13a662ec4f42e353_2019-04-04--21-28-07_4_40.png",
+"r005_3f85a63eb5727bf6_2019-03-14--18-37-23_4_695.png",
+"r006_401f1a07aeb8aa63_2019-03-05--19-05-20_5_50.png",
+"r007_3f85a63eb5727bf6_2019-03-07--19-37-21_7_100.png",
+"r008_187e19c47657a5cf_2019-03-12--17-24-56_11_700.png"
 ];
 
 var prefix = 0;
@@ -2386,6 +2395,14 @@ function imageGroup()
   
   changeImage(0);
   }
+else if(this.id === "r" && this.checked)
+  {
+  prefix = 2100
+  document.getElementById('index').max = 9
+  document.getElementById('index').value = 0;
+  
+  changeImage(0);
+  }
 }
 
 function changeImage(index)
@@ -2427,6 +2444,7 @@ document.getElementById('zoom-container').addEventListener('mouseout', zoomer.st
 document.getElementById('index').addEventListener('change', function(evt) {changeImage(Number(this.value))} );
 document.getElementById('d').addEventListener('change', imageGroup );
 document.getElementById('h').addEventListener('change', imageGroup );
+document.getElementById('r').addEventListener('change', imageGroup );
 
 document.onkeydown = checkKey;
 
