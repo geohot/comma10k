@@ -2231,11 +2231,6 @@ var translateY = 0
 
 
 
-const zoom = (nextScale, event) => {
-
- 
-}
-
 
 
   var zoomer = (function () {
@@ -2276,6 +2271,20 @@ const zoom = (nextScale, event) => {
 			translateY = 0;
 			translateX = (window.innerWidth - document.getElementById("image1").getBoundingClientRect().width)/2;
 		}
+		
+ 
+                
+
+				
+				if (translateY > 0)
+                {
+                    translateY =0;
+                }
+				
+                if (translateY < -(mask.getBoundingClientRect().height- orig_height))
+                {
+                    translateY = -(mask.getBoundingClientRect().height- orig_height)
+                }
   
 
   mask.style.transform = `translate(${translateX}px, ${translateY}px) scale(${nextScale})`;
@@ -2418,8 +2427,18 @@ function changeImage(index)
 
 	document.getElementById("image2").src = "https://raw.githubusercontent.com/commaai/comma10k/master/imgs/" + images[prefix+index];
 	document.getElementById("image1").src = "https://raw.githubusercontent.com/commaai/comma10k/master/masks/" + images[prefix+index];
-	  
+	  resetView();
         M.toast({html: images[index]})
+}
+
+function resetView()
+{
+	translateY = 0;
+	translateX = (window.innerWidth - document.getElementById("image1").getBoundingClientRect().width)/2;
+	currentScale = 1;
+	document.getElementById("image1").style.transform = `translate(${translateX}px, ${translateY}px)  scale(${1}) `;
+	document.getElementById("image2").style.transform = document.getElementById("image1").style.transform 
+        
 }
 
 function imageLoaded()
