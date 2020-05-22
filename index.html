@@ -21,6 +21,9 @@ margin: 0;
   margin: auto;
   display:block;
   position:relative;
+  transform-origin: 0 0;
+  
+  
 }
 
 #zoom-container {
@@ -58,10 +61,10 @@ opacity:0.5;
 <div style="height:100%;display: flex;flex-flow: column;margin:0;padding:0">
 	<div id="zoom-container">
 		<div class="parent">
-		  <div style="position:absolute; top: 50%;height:100%;left: 50%;transform: translate(-50%, -50%)">
-		  <img ondragstart="return false" id="image2" class="zoom-img" src="https://raw.githubusercontent.com/commaai/comma10k/master/imgs/1000_0812e2149c1b5609_2018-10-01--10-33-57_45_573.png" />
+		  <div style="position:absolute; height:100%;;">
+			<img ondragstart="return false" id="image2" class="zoom-img" src="https://raw.githubusercontent.com/commaai/comma10k/master/imgs/1000_0812e2149c1b5609_2018-10-01--10-33-57_45_573.png" />
 		  </div>
-		  <div id="maskContainer" style="position:absolute; top: 50%;height:100%;left: 50%;transform: translate(-50%, -50%)">
+		  <div id="maskContainer" style="position:absolute;height:100%;;">
 			<img ondragstart="return false" id="image1" class="zoom-img" src="https://raw.githubusercontent.com/commaai/comma10k/master/masks/1000_0812e2149c1b5609_2018-10-01--10-33-57_45_573.png" />
 		  </div>
 		</div>
@@ -2218,10 +2221,23 @@ var images = ["0000_0085e9e41513078a_2018-08-19--13-26-08_11_864.png",
 
 var prefix = 0;
 var currentIndex = 1000;
-var zoom_factor = 1.0,
+var currentScale = 1.0,
 orig_width = document.getElementById('image1').getBoundingClientRect().width,
       orig_height = document.getElementById('image1').getBoundingClientRect().height;
-	  
+var translateX = 0
+var translateY = 0
+
+
+
+
+
+const zoom = (nextScale, event) => {
+
+ 
+}
+
+
+
   var zoomer = (function () {
     var img_ele = null,
 	 img_ele2 = null,
@@ -2232,50 +2248,40 @@ orig_width = document.getElementById('image1').getBoundingClientRect().width,
       current_top = 0,
       current_left = 0;
       
+	  
+	  
+	  
+	  
+	  
 
     return {
-        zoom: function (zoomincrement) {
-            img_ele = document.getElementById('image1');
-			img_ele2 = document.getElementById('image2');
-            zoom_factor = zoom_factor + zoomincrement;
-            if (zoom_factor <= 1.0)
-            {
-                zoom_factor = 1.0;
-                img_ele.style.top =  '0px';    
-                img_ele.style.left = '0px';
-				
-				img_ele2.style.top = img_ele.style.top;
-				img_ele2.style.left = img_ele.style.left;
-            }
-            var pre_width = img_ele.getBoundingClientRect().width, pre_height = img_ele.getBoundingClientRect().height;
-            console.log('prewidth='+pre_width+'; pre_height ='+pre_height);
-        //  img_ele.style.width = (pre_width * zoomincrement) + 'px';
-        //  img_ele.style.height = (pre_height * zoomincrement) + 'px';
-            var new_width = (orig_width * zoom_factor);
-            var new_heigth = (orig_height * zoom_factor);
+        zoom: function (nextScale, event) {
+		
+            var mask = document.getElementById('image1');
+			var image = document.getElementById('image2');
+			 const ratio = 1 - nextScale / currentScale;
 
-                console.log('postwidth='+new_width+'; postheight ='+new_heigth);
+  const {
+    clientX,
+    clientY
+  } = event
 
-            if (current_left < (orig_width - new_width))
-            {
-                current_left = (orig_width - new_width);
-            }
-            if (current_top < (orig_height - new_heigth))
-            {
-                current_top = (orig_height - new_heigth);
-            }
-            img_ele.style.left = current_left + 'px';
-            img_ele.style.top = current_top + 'px';
-            img_ele.style.width = new_width + 'px';
-            img_ele.style.height = new_heigth + 'px';
+  translateX += (clientX - translateX) * ratio;
+  translateY += (clientY - translateY) * ratio;
+  
+  if(nextScale < 1)
+		{
+			nextScale = 1;
 			
-			img_ele2.style.left = img_ele.style.left;
-			img_ele2.style.top = img_ele.style.top;
-			img_ele2.style.width = img_ele.style.width;
-			img_ele2.style.height = img_ele.style.height;
-				
+			translateY = 0;
+			translateX = (window.innerWidth - document.getElementById("image1").getBoundingClientRect().width)/2;
+		}
+  
 
-            img_ele = null;
+  mask.style.transform = `translate(${translateX}px, ${translateY}px) scale(${nextScale})`;
+  image.style.transform = mask.style.transform;
+
+  currentScale = nextScale
         },
 
         start_drag: function () {
@@ -2284,17 +2290,18 @@ orig_width = document.getElementById('image1').getBoundingClientRect().width,
           img_ele = document.getElementById('image1');
 			img_ele2 = document.getElementById('image2');
 			
-          x_img_ele = window.event.clientX - document.getElementById('image1').offsetLeft;
-          y_img_ele = window.event.clientY - document.getElementById('image1').offsetTop;
-          console.log('img='+img_ele.toString()+'; x_img_ele='+x_img_ele+'; y_img_ele='+y_img_ele+';')
-          console.log('offLeft='+document.getElementById('image1').offsetLeft+'; offTop='+document.getElementById('image1').offsetTop)
+			  translateX = (window.event.clientX - translateX);
+			translateY = (window.event.clientY - translateY) ;
+			
+          
         },
 
         stop_drag: function () {
 	
           if (img_ele !== null) {
-
-            console.log(img_ele.style.left+' - '+img_ele.style.top);
+				translateX = (window.event.clientX - translateX);
+				translateY = (window.event.clientY - translateY) ;
+            
             }
           img_ele = null;
         },
@@ -2305,26 +2312,26 @@ orig_width = document.getElementById('image1').getBoundingClientRect().width,
             {
                 var x_cursor = window.event.clientX;
                 var y_cursor = window.event.clientY;
-                var new_left = (x_cursor - x_img_ele);
-             
-			
+                var new_left = (x_cursor - translateX);
+ 
+                var new_top = ( y_cursor - translateY);
+
 				
-                var new_top = ( y_cursor - y_img_ele);
-                if (new_top > 0)
+				if (new_top > 0)
                 {
-                    new_top = 0;
+                    new_top =0;
                 }
-                if (new_top < (orig_height - img_ele.height))
-                {
-                    new_top = (orig_height - img_ele.height);
-                }
-                current_left = new_left;
-                img_ele.style.left = new_left + 'px';
-                current_top = new_top;
-                img_ele.style.top = new_top + 'px';
 				
-				img_ele2.style.left = img_ele.style.left
-				img_ele2.style.top = img_ele.style.top
+                if (new_top < -(img_ele.getBoundingClientRect().height- orig_height))
+                {
+                    new_top = -(img_ele.getBoundingClientRect().height- orig_height)
+                }
+				
+                              
+				
+				img_ele.style.transform = `translate(${new_left}px, ${new_top}px)  scale(${currentScale}) `;
+				img_ele2.style.transform = img_ele.style.transform 
+				
 
                 //console.log(img_ele.style.left+' - '+img_ele.style.top);
             }
@@ -2417,22 +2424,30 @@ function changeImage(index)
 
 function imageLoaded()
 {
-if(zoom_factor === 1.0)
-{
-	orig_width = document.getElementById("image2").getBoundingClientRect().width;
-    orig_height = document.getElementById("image2").getBoundingClientRect().height;
+	if(currentScale === 1.0)
+	{
+		orig_width = document.getElementById("image2").getBoundingClientRect().width;
+		orig_height = document.getElementById("image2").getBoundingClientRect().height;
 	}
+	
+	translateX = (window.innerWidth - document.getElementById("image2").getBoundingClientRect().width)/2;
+	
+	document.getElementById("image1").style.transform = `translate(${translateX}px, ${translateY}px)  scale(${currentScale}) `;
+	document.getElementById("image2").style.transform = document.getElementById("image1").style.transform 
 }
 
 window.addEventListener("dblclick", event => {
 
-zoomer.zoom(0.25);
+zoomer.zoom(0.25, event);
     
 	});
 	
 	window.addEventListener("wheel", event => {
-const delta = -Math.sign(event.deltaY);
-zoomer.zoom(delta/4);
+	
+	const delta = event.wheelDelta / 120
+  const nextScale = currentScale + delta 
+
+zoomer.zoom(nextScale, event);
     
 	});
 	
