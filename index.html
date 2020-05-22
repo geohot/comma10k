@@ -2390,6 +2390,18 @@ var translateY = 0
 changeImage(currentIndex);
 	   // right arrow
     }
+	else if (e.keyCode == '188') {
+	if(document.getElementById("image1").style.opacity === document.getElementById("opacityControl").value)
+	{
+	document.getElementById("image1").style.opacity = 0;
+	}
+	else
+	{
+	document.getElementById("image1").style.opacity = document.getElementById("opacityControl").value;
+	}
+	
+    }
+
 
 }
 
