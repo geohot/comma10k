@@ -14,8 +14,30 @@ height:100%;
 padding:0;
 margin: 0;
 }
+	
+	 .zoom-img-pixelated {
+  cursor: move;
+  height: 100%;
+  margin: auto;
+  display:block;
+  position:relative;
+  transform-origin: 0 0;
+  image-rendering: pixelated ;
+  
+}
 
-.zoom-img {
+ .zoom-img-hq {
+  cursor: move;
+  height: 100%;
+  margin: auto;
+  display:block;
+  position:relative;
+  transform-origin: 0 0;
+  image-rendering: high-quality ;
+  
+}
+	
+	.mask-img {
   cursor: move;
   height: 100%;
   margin: auto;
@@ -62,10 +84,10 @@ opacity:0.5;
 	<div id="zoom-container">
 		<div class="parent">
 		  <div style="position:absolute; height:100%;;">
-			<img ondragstart="return false" id="image2" class="zoom-img" src="https://raw.githubusercontent.com/commaai/comma10k/master/imgs/2000_ff83f397542ab647_2018-05-18--01-52-12_11_945.png" />
+			<img ondragstart="return false" id="image2" class="zoom-img-pixelated" src="https://raw.githubusercontent.com/commaai/comma10k/master/imgs/2000_ff83f397542ab647_2018-05-18--01-52-12_11_945.png" style="user-select: none;"  />
 		  </div>
 		  <div id="maskContainer" style="position:absolute;height:100%;;">
-			<img ondragstart="return false" id="image1" class="zoom-img" src="https://raw.githubusercontent.com/commaai/comma10k/master/masks/2000_ff83f397542ab647_2018-05-18--01-52-12_11_945.png" />
+			<img ondragstart="return false" id="image1" class="mask-img" src="https://raw.githubusercontent.com/commaai/comma10k/master/masks/2000_ff83f397542ab647_2018-05-18--01-52-12_11_945.png" style="user-select: none;"  />
 		  </div>
 		</div>
 		  
@@ -10172,6 +10194,19 @@ changeImage(currentIndex);
 	else
 	{
 	document.getElementById("image1").style.opacity = document.getElementById("opacityControl").value;
+	}
+	
+    }
+		else if (e.keyCode == '80') {
+	if(document.getElementById("image2").classList.contains("zoom-img-pixelated"))
+	{
+		document.getElementById("image2").classList.remove("zoom-img-pixelated");
+		document.getElementById("image2").classList.add("zoom-img-hq");
+	}
+	else
+	{
+		document.getElementById("image2").classList.remove("zoom-img-hq");
+		document.getElementById("image2").classList.add("zoom-img-pixelated");
 	}
 	
     }
