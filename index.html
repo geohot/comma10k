@@ -83,12 +83,15 @@ opacity:0.5;
 <div style="height:100%;display: flex;flex-flow: column;margin:0;padding:0">
 	<div id="zoom-container">
 		<div class="parent">
-		  <div style="position:absolute; height:100%;;">
-			<img ondragstart="return false" id="image2" class="zoom-img-pixelated" src="https://raw.githubusercontent.com/commaai/comma10k/master/imgs/2000_ff83f397542ab647_2018-05-18--01-52-12_11_945.png" style="user-select: none;"  />
-		  </div>
-		  <div id="maskContainer" style="position:absolute;height:100%;;">
-			<img ondragstart="return false" id="image1" class="mask-img" src="https://raw.githubusercontent.com/commaai/comma10k/master/masks/2000_ff83f397542ab647_2018-05-18--01-52-12_11_945.png" style="user-select: none;"  />
-		  </div>
+			<div style="position:absolute; height:100%;;">
+				<img ondragstart="return false" id="image2" class="zoom-img-pixelated" src="https://raw.githubusercontent.com/commaai/comma10k/master/imgs/0000_0085e9e41513078a_2018-08-19--13-26-08_11_864.png" style="user-select: none;" />
+			</div>
+			<div id="confusionContainer" style="position:absolute;height:100%;;">
+                <img ondragstart="return false" id="image3" class="mask-img" src="https://raw.githubusercontent.com/spektor56/comma10k/gh-pages/ConfusionMasks/0000_0085e9e41513078a_2018-08-19--13-26-08_11_864.png" style="user-select: none;" />
+            </div>
+			<div id="maskContainer" style="position:absolute;height:100%;;">
+				<img ondragstart="return false" id="image1" class="mask-img" src="https://raw.githubusercontent.com/commaai/comma10k/master/masks/0000_0085e9e41513078a_2018-08-19--13-26-08_11_864.png" style="user-select: none;" />
+			</div>
 		</div>
 		  
 	</div>	
@@ -96,7 +99,7 @@ opacity:0.5;
 	
 	<div style="height:30px;margin:0;padding:0;display: flex;flex-flow: row;">
 		<div style="width:60px;margin:0;padding:0">
-			<input id="index" style="height:30px;width:100%;padding:0;margin:0" type="number" value="2000" max="4999" min="0">
+			<input id="index" style="height:30px;width:100%;padding:0;margin:0" type="number" value="0" max="4999" min="0">
 		</div>
 		<div style="width:186px;margin:0;padding:0">
 		
@@ -119,7 +122,7 @@ opacity:0.5;
     </label>
 		</div>
 		<div style="flex-grow:1;margin:0;padding:0">
-			<input style=";padding:0;margin:0" id="opacityControl" type="range" min="0" max="1" step="0.01" value="0.5" oninput="image1.style.opacity = opacityControl.value" />
+			<input style=";padding:0;margin:0" id="opacityControl" type="range" min="0" max="1" step="0.01" value="0.5" oninput="image1.style.opacity = opacityControl.value; image3.style.opacity = opacityControl.value" />
 		</div>
 		<div style="flex-grow:1;margin:0;padding:0">
 			<input style=";padding:0;margin:0" id="brightnessControl" type="range" min="50" max="300" step="1" value="100" oninput="image2.style.filter = 'brightness('+brightnessControl.value+'%) contrast('+contrastControl.value+'%)'" />
@@ -10017,7 +10020,7 @@ var images = [ "0000_0085e9e41513078a_2018-08-19--13-26-08_11_864.png",
 ];
 
 var prefix = 0;
-var currentIndex = 2000;
+var currentIndex = 0;
 var currentScale = 1.0,
 orig_width = document.getElementById('image1').getBoundingClientRect().width,
       orig_height = document.getElementById('image1').getBoundingClientRect().height;
@@ -10051,6 +10054,7 @@ var translateY = 0
 		
             var mask = document.getElementById('image1');
 			var image = document.getElementById('image2');
+            var confusion = document.getElementById('image3');
 			 const ratio = 1 - nextScale / currentScale;
 
   const {
@@ -10084,7 +10088,8 @@ var translateY = 0
   */
 
   mask.style.transform = `translate(${translateX}px, ${translateY}px) scale(${nextScale})`;
-  image.style.transform = mask.style.transform;
+			image.style.transform = mask.style.transform;
+            confusion.style.transform = mask.style.transform;
 
   currentScale = nextScale
         },
@@ -10094,6 +10099,7 @@ var translateY = 0
 
           img_ele = document.getElementById('image1');
 			img_ele2 = document.getElementById('image2');
+            img_ele3 = document.getElementById('image3');
 			
 			  translateX = (window.event.clientX - translateX);
 			translateY = (window.event.clientY - translateY) ;
@@ -10136,6 +10142,7 @@ var translateY = 0
 				
 				img_ele.style.transform = `translate(${new_left}px, ${new_top}px)  scale(${currentScale}) `;
 				img_ele2.style.transform = img_ele.style.transform 
+                img_ele3.style.transform = img_ele.style.transform 
 				
 
                 //console.log(img_ele.style.left+' - '+img_ele.style.top);
@@ -10159,11 +10166,13 @@ var translateY = 0
 		var opacityControl = document.getElementById("opacityControl");
 		opacityControl.stepUp(1);
 		document.getElementById("image1").style.opacity = opacityControl.value
+        document.getElementById("image3").style.opacity = opacityControl.value
     }
     else if (e.keyCode == '40') {
         var opacityControl = document.getElementById("opacityControl");
 		opacityControl.stepDown(1);
 		document.getElementById("image1").style.opacity = opacityControl.value
+        document.getElementById("image3").style.opacity = opacityControl.value
     }
     else if (e.keyCode == '37') {
 	
@@ -10190,11 +10199,24 @@ changeImage(currentIndex);
 	if(document.getElementById("image1").style.opacity === document.getElementById("opacityControl").value)
 	{
 	document.getElementById("image1").style.opacity = 0;
+
 	}
 	else
 	{
 	document.getElementById("image1").style.opacity = document.getElementById("opacityControl").value;
 	}
+	
+	}
+    else if (e.keyCode == '67') {
+        if(document.getElementById("image3").style.opacity === document.getElementById("opacityControl").value)
+        {
+            document.getElementById("image3").style.opacity = 0;
+
+        }
+        else
+        {
+            document.getElementById("image3").style.opacity = document.getElementById("opacityControl").value;
+        }
 	
     }
 		else if (e.keyCode == '80') {
@@ -10255,7 +10277,8 @@ function changeImage(index)
 	currentIndex = index;
 
 	document.getElementById("image2").src = "https://raw.githubusercontent.com/commaai/comma10k/master/imgs/" + images[prefix+index];
-	document.getElementById("image1").src = "https://raw.githubusercontent.com/commaai/comma10k/master/masks/" + images[prefix+index];
+	document.getElementById("image1").src = "https://raw.githubusercontent.com/commaai/comma10k/master/masks/" + images[prefix + index];
+    document.getElementById("image3").src = "https://raw.githubusercontent.com/spektor56/comma10k/gh-pages/ConfusionMasks/" + images[prefix+index];
 	  resetView();
         M.toast({html: images[index]})
 }
@@ -10267,6 +10290,7 @@ function resetView()
 	currentScale = 1;
 	document.getElementById("image1").style.transform = `translate(${translateX}px, ${translateY}px)  scale(${1}) `;
 	document.getElementById("image2").style.transform = document.getElementById("image1").style.transform 
+    document.getElementById("image3").style.transform = document.getElementById("image1").style.transform 
         
 }
 
@@ -10282,6 +10306,7 @@ function imageLoaded()
 	
 	document.getElementById("image1").style.transform = `translate(${translateX}px, ${translateY}px)  scale(${currentScale}) `;
 	document.getElementById("image2").style.transform = document.getElementById("image1").style.transform 
+    document.getElementById("image3").style.transform = document.getElementById("image1").style.transform 
 }
 
 window.addEventListener("dblclick", event => {
